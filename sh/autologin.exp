@@ -1,0 +1,23 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+
+set USER huyunting 
+set RELAYSVR relay00.baidu.com 
+set sshhost tc-dba-csp-test00.tc 
+set sshuser huyunting 
+#set passwd [lindex $argv 1]
+spawn ssh $USER@$RELAYSVR
+
+
+expect {
+   "*password*" { 
+        expect_user -re "(.*)\n" { set PASSWORD $expect_out(1,string) }
+        send "***REMOVED***${PASSWORD}\r" 
+        exp_continue
+    } 
+    sleep 1
+   "*bash-baidu-ssl*" { send "ssh $sshuser@$sshhost\r" }
+}
+
+interact
