@@ -4,7 +4,7 @@ set timeout 30
 
 set USER huyunting 
 set RELAYSVR relay00.baidu.com 
-set sshhost tc-dba-csp-test00.tc 
+set sshhost [lindex $argv 0] 
 set sshuser huyunting 
 #set passwd [lindex $argv 1]
 spawn ssh $USER@$RELAYSVR
