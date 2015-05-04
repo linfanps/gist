@@ -1,10 +1,11 @@
-#ifndef __GLOBAL_H
-#define __GLOBAL_H
+#ifndef __COMMON_H
+#define __COMMON_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <string.h>
@@ -12,6 +13,7 @@
 
 #define PORT 12345
 #define HOST "127.0.0.1"
+//#define HOST "120.132.37.178"
 #define BACKLOG 10
 #define BUFFERSIZE 1024
 

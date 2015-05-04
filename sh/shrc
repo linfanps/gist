@@ -36,3 +36,6 @@ myhelp()
     echo "退出keyboard Cleaner:command+Q"
     echo "调节音量或屏幕亮度的同时按住Option/alt+Shift键，将使原来每一格的调节单位变为原来的1/4"
 }
+
+alias create-tags='/usr/local/bin/ctags -R'
+
