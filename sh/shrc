@@ -16,7 +16,26 @@ alias bl='brew list'
 alias l-ouba-test-api='ssh -p 2208 root@api-test.obar.com.cn'
 alias l-ouba-api='ssh -p 2208 root@api.obar.com.cn'
 alias l-ouba-android='ssh -p 2208 root@json-linux-test.obar.com.cn'
-alias lb='ssh huyunting@relay00.baidu.com'
+alias ldev='ssh huyunting@10.4.17.164'
+alias lrandian='ssh deploy@106.187.97.207'
+
+alias v1='vagrant ssh vm1'
+alias v2='vagrant ssh vm2'
+alias vup='vagrant up'
+alias vhalt='vagrant halt'
+alias vreload='vagrant reload'
+
+alias create-tags='/usr/local/bin/ctags -R'
+alias gproxy='sudo /usr/local/goagent/local/proxy.sh'
+#open file
+alias -s html=vi
+
+myhelp()
+{
+    echo "截图:command+shift+4"
+    echo "退出keyboard Cleaner:command+Q"
+    echo "调节音量或屏幕亮度的同时按住Option/alt+Shift键，将使原来每一格的调节单位变为原来的1/4"
+}
 
 alias create-tags='/usr/local/bin/ctags -R'
 
