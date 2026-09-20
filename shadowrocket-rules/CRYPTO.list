@@ -1,11 +1,11 @@
 # NAME: CRYPTO
 # DESCRIPTION: Crypto routing rules extracted from top500_whitelist.conf.
 # FORMAT: Shadowrocket RULE-SET list; select the outbound policy in the parent configuration.
-# UPDATED: 2026-09-19
+# UPDATED: 2026-09-20
 # DOMAIN: 54
-# DOMAIN-SUFFIX: 95
+# DOMAIN-SUFFIX: 96
 # IP-CIDR: 7
-# TOTAL: 156
+# TOTAL: 157
 #
 # SOURCES:
 # - top500_whitelist.conf (rules assigned to CRYPTO节点)
@@ -49,6 +49,7 @@ DOMAIN-SUFFIX,moveposition.xyz
 DOMAIN-SUFFIX,htx.com
 DOMAIN-SUFFIX,coincall.com
 DOMAIN-SUFFIX,bitfinex.com
+DOMAIN-SUFFIX,backpack.exchange
 
 # -----------------------------------------------------------------------------
 # Bybit
