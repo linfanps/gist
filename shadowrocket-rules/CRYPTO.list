@@ -44,9 +44,9 @@ DOMAIN-SUFFIX,bouncebit.io
 DOMAIN-SUFFIX,moveposition.xyz
 
 # -----------------------------------------------------------------------------
-# All .xyz domains
+# USENEST
 # -----------------------------------------------------------------------------
-DOMAIN-SUFFIX,xyz
+DOMAIN-SUFFIX,usenest.xyz
 
 # -----------------------------------------------------------------------------
 # Centralized exchanges
