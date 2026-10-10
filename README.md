@@ -6,7 +6,6 @@
 
 | 目录 | 作用 | 定位 |
 | --- | --- | --- |
-| [`sh/`](./sh/) | Shell 别名、Expect SSH 辅助脚本和 iTerm 配色 | 历史环境片段，包含特定用户名、主机和路径，不建议未经检查直接加载 |
 | [`shadowrocket-rules/`](./shadowrocket-rules/) | Shadowrocket 配置与独立规则集 | 当前维护的网络规则；公开文件不包含 MITM CA 私钥和口令 |
 | [`tab-renamer/`](./tab-renamer/) | 自定义 Chrome 标签页标题的 Manifest V3 扩展 | 可直接以“加载已解压的扩展程序”方式安装，详细说明见目录内 README |
 | [`vim/`](./vim/) | 从 `linfanps/vim` 迁入的 Vim 配置、脚本和模板 | 旧版 Vim 开发环境归档，以 Vundle 管理插件，适合参考或在旧环境中复用 |
@@ -58,13 +57,3 @@ vim +PluginInstall +qall
 这套配置面向旧版 Vim，并保留了依赖 Python 2 的旧 YouCompleteMe 安装说明；在现代 Vim、Neovim 或新版插件环境中使用前需要自行调整。
 
 迁移时没有纳入 Vim 自动生成的 `.netrwhist`，因为它只记录机器本地目录历史。源仓库中的 YouCompleteMe、ack.vim、closetag.vim 和 vim-go 是未配置 `.gitmodules` 的 Git 链接，不含实际插件源码；这些依赖继续由 `plugins.vim` 中的 Vundle 声明负责安装。
-
-## Shell 配置
-
-`sh/` 保存的是历史终端环境片段：
-
-- `shrc`：语言环境、Homebrew/Vagrant 命令别名和历史 SSH 快捷入口。
-- `autologin.exp`：旧环境中的交互式 SSH 跳板辅助脚本。
-- `itermcolors`：iTerm 配色文件。
-
-这些文件包含环境特定的用户名、地址和路径。使用前应删除失效入口并确认脚本行为，不应直接作为通用配置分发。
