@@ -1,47 +1,61 @@
-export LC_ALL=en_US.UTF-8  
+export GOPATH=~/Code/go
 export LANG=en_US.UTF-8
+export PATH=$HOME/.local/bin:$GOPATH/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/mysql/bin:$PATH
 
-LSCOLORS='gxfxbEaEBxxEhEhBaDaCaD'
+# completion (brew-installed tools put their completions in site-functions)
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+compinit
+
+eval "$(mise activate zsh)"
+eval "$(starship init zsh)"
+
+# fzf: Ctrl+R history, Ctrl+T files, Alt+C dirs, **<Tab> fuzzy completion
+source <(fzf --zsh)
+
+# zsh plugins (brew); syntax-highlighting must stay last
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Tab: accept the gray suggestion if there is one, otherwise normal completion
+_tab_accept_or_complete() {
+  if [[ -n $POSTDISPLAY ]]; then
+    zle autosuggest-accept
+  else
+    zle fzf-completion
+  fi
+}
+zle -N _tab_accept_or_complete
+bindkey '^I' _tab_accept_or_complete
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
 #alias
-alias download='cd ~/Downloads/'
-alias vi='mvim'
+alias ll='ls -l'
+alias l='ls -l'
+alias la='ls -a'
+alias ls='eza'
+alias cat='bat'
+alias cd='z'
 
-#brew
+alias vi='mvim -v'
+alias vim='mvim -v'
 alias bi='brew install'
 alias bs='brew search'
 alias bui='brew uninstall'
 alias bl='brew list'
 
-alias v1='vagrant ssh vm1'
-alias v2='vagrant ssh vm2'
-alias vup='vagrant up'
-alias vhalt='vagrant halt'
-alias vreload='vagrant reload'
 
-alias create-tags='/usr/local/bin/ctags -R'
-#open file
-alias -s html=vi
+alias mysqlstart='brew services start mysql'
+alias mysqlstop='brew services stop mysql'
+alias mysqlconnect='mysql -uroot'
 
-#ssh
-alias go-ouba-test-api='ssh -p 2208 root@api-test.obar.com.cn'
-alias go-ouba-api='ssh -p 2208 root@api.obar.com.cn'
-alias go-ouba-android='ssh -p 2208 root@json-linux-test.obar.com.cn'
-alias go-toutiao-test='ssh huyunting@10.4.17.164'
+alias go-bytedance='kinit huyunting@BYTEDANCE.COM'
+alias go-tencent_cloud-261208='ssh ubuntu@43.128.144.198'
+alias go-cloudclone='ssh root@66.154.104.181'
+alias go-cndevbox='ssh huyunting@10.37.250.174'
 
-alias go-linfan='ssh root@45.55.20.26'
-alias go-randian-master='ssh -p2200 mysql@101.200.0.21'
-alias go-randian-slave='ssh -p2200 mysql@101.200.0.105'
-alias go-randian-db='ssh -p2200 deploy@101.200.0.21'
-alias go-randian-web1='ssh -p2200 deploy@101.200.0.189'
-alias go-randian-web2='ssh -p2200 deploy@101.200.2.209'
-alias go-randian-tool='ssh -p2200 deploy@101.200.0.105'
-alias go-randian-monitor='ssh -p2200 deploy@101.200.236.157'
-myhelp()
-{
-    echo "截图:command+shift+4"
-    echo "退出keyboard Cleaner:command+Q"
-    echo "调节音量或屏幕亮度的同时按住Option/alt+Shift键，将使原来每一格的调节单位变为原来的1/4"
-    echo "Ctrl-p Ctrl-q退出docker容器并且不终止"
-}
+alias chrome-for-ai='open -na "Google Chrome" --args --user-data-dir=/Users/linfan/Library/Application\ Support/Google/ChromeForAI --no-default-browser-check --remote-debugging-port=9222'
+alias chrome-for-auto='open -na "Google Chrome" --args --user-data-dir=/Users/linfan/Library/Application\ Support/Google/ChromeAuto --no-default-browser-check'
 
-
+# zoxide must be initialized last
+eval "$(zoxide init zsh)"
