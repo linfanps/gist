@@ -47,7 +47,7 @@ alias bl='brew list'
 
 alias mysqlstart='brew services start mysql'
 alias mysqlstop='brew services stop mysql'
-alias mysqlconnect='mysql -uroot'
+alias mysqlconnect='mysql -uroot'  # password in ~/.my.cnf (not committed)
 
 alias go-bytedance='kinit huyunting@BYTEDANCE.COM'
 alias go-tencent_cloud-261208='ssh ubuntu@43.128.144.198'
