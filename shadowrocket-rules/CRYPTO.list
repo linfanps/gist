@@ -3,9 +3,9 @@
 # FORMAT: Shadowrocket RULE-SET list; select the outbound policy in the parent configuration.
 # UPDATED: 2026-10-17
 # DOMAIN: 54
-# DOMAIN-SUFFIX: 98
+# DOMAIN-SUFFIX: 99
 # IP-CIDR: 7
-# TOTAL: 159
+# TOTAL: 160
 #
 # SOURCES:
 # - top500_whitelist.conf (rules assigned to CRYPTO节点)
@@ -22,6 +22,7 @@ DOMAIN-SUFFIX,forter.com
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,axis.to
 DOMAIN-SUFFIX,ethena.fi
+DOMAIN-SUFFIX,aerodrome.finance
 DOMAIN-SUFFIX,xstocks.fi
 DOMAIN-SUFFIX,bitway.com
 DOMAIN-SUFFIX,zklighter.elliot.ai
