@@ -1,11 +1,11 @@
 # NAME: CRYPTO
 # DESCRIPTION: Crypto routing rules extracted from top500_whitelist.conf.
 # FORMAT: Shadowrocket RULE-SET list; select the outbound policy in the parent configuration.
-# UPDATED: 2026-10-19
+# UPDATED: 2026-10-20
 # DOMAIN: 54
-# DOMAIN-SUFFIX: 101
+# DOMAIN-SUFFIX: 102
 # IP-CIDR: 7
-# TOTAL: 162
+# TOTAL: 163
 #
 # SOURCES:
 # - top500_whitelist.conf (rules assigned to CRYPTO节点)
@@ -19,6 +19,7 @@
 # General crypto, DeFi, and shared services
 # -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,forter.com
+DOMAIN-SUFFIX,sumsub.com
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,axis.to
 DOMAIN-SUFFIX,ethena.fi
