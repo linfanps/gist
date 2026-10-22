@@ -25,6 +25,7 @@ DOMAIN-SUFFIX,ethena.fi
 DOMAIN-SUFFIX,aerodrome.finance
 DOMAIN-SUFFIX,uniswap.org
 DOMAIN-SUFFIX,morpho.org
+DOMAIN-SUFFIX,usenest.xyz
 DOMAIN-SUFFIX,ondoperps.xyz
 DOMAIN-SUFFIX,xstocks.fi
 DOMAIN-SUFFIX,bitway.com
@@ -47,11 +48,6 @@ DOMAIN-SUFFIX,buidlpad.com
 DOMAIN-SUFFIX,merkl.xyz
 DOMAIN-SUFFIX,bouncebit.io
 DOMAIN-SUFFIX,moveposition.xyz
-
-# -----------------------------------------------------------------------------
-# USENEST
-# -----------------------------------------------------------------------------
-DOMAIN-SUFFIX,usenest.xyz
 
 # -----------------------------------------------------------------------------
 # Centralized exchanges
