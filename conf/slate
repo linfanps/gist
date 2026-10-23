@@ -1,0 +1,135 @@
+# Global Configs 全局配置
+config defaultToCurrentScreen true       # 窗口操作默认作用于当前焦点所在屏幕
+config windowHintsShowIcons true         # 窗口提示(Hints)中显示 App 图标
+config windowHintsIgnoreHiddenWindows false  # 不忽略隐藏窗口，隐藏窗口也显示提示
+config windowHintsSpread true            # 提示标签自动散开，避免相互重叠
+
+# Show a positioning grid for each monitor
+# bind g:cmd grid padding:5 0:2,2 1:2,1       #将第一个窗口分成4份，第二分成两份
+
+# Monitor Aliases 显示器别名
+# 用「分辨率」而不是「序号」来指定屏幕：插拔顺序变了也不会错位
+alias mon-laptop  1728x1117      # 内建 Liquid Retina XDR（主屏，menubar 所在）
+alias mon-wide    1920x1080      # HP Z27k G3   横屏 4K（UI 缩放后 1920x1080）
+alias mon-tall    1080x1920      # HP Z27       竖屏（UI 缩放后 1080x1920）
+
+# General aliases
+alias hyper cmd;shift            # 组合键：定义 hyper = ⌘+⇧，供下方大量绑定复用
+alias sox screenOriginX          # 屏幕原点X坐标缩写
+alias soy screenOriginY          # 屏幕原点Y坐标缩写
+alias ssx screenSizeX            # 屏幕宽度缩写
+alias ssy screenSizeY            # 屏幕高度缩写
+
+# Abstract positions  相对位置
+alias centered           ${sox}+${ssx}/8;${soy}+${ssy}/8 ${ssx}/8*6;${ssy}/8*6   # 居中，四周各留1/8边距，占屏6/8
+alias fullscreen         ${sox};${soy} ${ssx};${ssy}                             # 满屏
+alias leftHalf           ${sox};${soy} ${ssx}/2;${ssy}                           # 左半屏
+alias bottomHalf         ${sox};${soy}+${ssy}/2 ${ssx};${ssy}/2                  # 下半屏
+alias topHalf            ${sox};${soy} ${ssx};${ssy}/2                           # 上半屏
+alias rightHalf          ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}                  # 右半屏
+alias topLeftQuarter     ${sox};${soy} ${ssx}/2;${ssy}/2                         # 左上1/4
+alias topRightQuarter    ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}/2               # 右上1/4
+alias bottomLeftQuarter  ${sox};${soy}+${ssy}/2 ${ssx}/2;${ssy}/2               # 左下1/4
+alias bottomRightQuarter ${sox}+${ssx}/2;${soy}+${ssy}/2 ${ssx}/2;${ssy}/2      # 右下1/4
+alias topThird           ${sox};${soy} ${ssx};${ssy}/3                           # 上1/3
+alias leftThird          ${sox};${soy} ${ssx}/3;${ssy}                           # 左1/3
+alias bottomThird        ${sox};${soy}+${ssy}/3 ${ssx};${ssy}/3                  # 下1/3
+alias rightThird         ${sox}+${ssx}/3*2;${soy} ${ssx}/3;${ssy}               # 右1/3
+
+# Concrete positions  具体位置
+# alias 1-full        move ${sox};${soy} ${ssx};${ssy}                ${mon-macbook}
+# alias 1-left        move ${sox};${soy} ${ssx}/2;${ssy}              ${mon-macbook}
+# alias 1-right       move ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}     ${mon-macbook}
+# alias 1-rightThird  move ${sox}+${ssx}/3*2;${soy} ${ssx}/3;${ssy}   ${mon-macbook}
+# alias 2-full        move ${sox};${soy} ${ssx};${ssy}                ${mon-right}
+# alias 2-left        move ${sox};${soy} ${ssx}/2;${ssy}              ${mon-right}
+# alias 2-right       move ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}     ${mon-right}
+# alias 2-righttop    move ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}/2   ${mon-right}
+# alias 2-rightbottom move ${sox}+${ssx}/2;${soy}+${ssy}/2 ${ssx}/2;${ssy}/2       ${mon-right}
+# alias 2-rightThird  move ${sox}+${ssx}/3*2;${soy} ${ssx}/3;${ssy}   ${mon-right}
+
+# 2 Monitor layout  两个显示器时的 layout
+# layout 2monitors 'iTerm':REPEAT             ${2-rightbottom} | ${1-left}
+# layout 2monitors 'Google Chrome':REPEAT            ${1-full}
+# layout 2monitors 'Sublime Text':REPEAT    ${2-right}
+# layout 2monitors 'MacVim':REPEAT            ${2-left} | ${2-right}
+# layout 2monitors 'Mail':REPEAT              ${2-left}
+# layout 2monitors 'Finder':REPEAT            ${2-righttop}
+# layout 2monitors 'Xcode':REPEAT             ${1-full}
+# layout 2monitors 'iTunes':REPEAT            ${1-full}
+# layout 2monitors 'Skim':REPEAT              ${2-right}
+# layout 2monitors 'nvALT':REPEAT             ${2-rightThird}
+
+# 1 Monitor layout 一个显示器时的布局
+# layout 1monitor 'iTerm':REPEAT              ${1-right}
+# layout 1monitor 'Sublime Text':REPEAT     ${1-left}
+# layout 1monitor 'MacVim':REPEAT             ${1-left} | ${1-right}
+# layout 1monitor 'Google Chrome':REPEAT             ${1-full}
+# layout 1monitor 'Mail':REPEAT               ${1-full}
+# layout 1monitor 'Finder':REPEAT             ${1-full}
+# layout 1monitor 'Xcode':REPEAT              ${1-full}
+# layout 1monitor 'iTunes':REPEAT             ${1-full}
+# layout 1monitor 'Skim':REPEAT               ${1-full}
+# layout 1monitors 'nvALT':REPEAT             ${1-rightThird}
+
+# Default Layouts
+# default 2monitors resolutions:2560x1600;2560x1600
+# default 1monitor  resolutions:2560x1600
+
+# bind 1:${hyper} layout 1monitor
+# bind 2:${hyper} layout 2monitors
+
+# Bindings 模拟 Vim 控制窗口位置
+bind g:${hyper} move ${centered}            # ⌘⇧+g 窗口居中
+bind o:${hyper} move ${fullscreen}          # ⌘⇧+o 窗口全屏
+bind h:${hyper} move ${leftHalf}            # ⌘⇧+h 移到左半屏(Vim左)
+bind j:${hyper} move ${bottomHalf}          # ⌘⇧+j 移到下半屏(Vim下)
+bind k:${hyper} move ${topHalf}             # ⌘⇧+k 移到上半屏(Vim上)
+bind l:${hyper} move ${rightHalf}           # ⌘⇧+l 移到右半屏(Vim右)
+bind u:${hyper} move ${topLeftQuarter}      # ⌘⇧+u 移到左上1/4
+bind i:${hyper} move ${topRightQuarter}     # ⌘⇧+i 移到右上1/4
+bind n:${hyper} move ${bottomLeftQuarter}   # ⌘⇧+n 移到左下1/4
+bind m:${hyper} move ${bottomRightQuarter}  # ⌘⇧+m 移到右下1/4
+bind y:${hyper} move ${leftThird}           # ⌘⇧+y 移到左1/3
+bind p:${hyper} move ${rightThird}          # ⌘⇧+p 移到右下1/3
+
+
+# Nudge Bindings
+bind right:shift;alt        nudge +10% +0   # ⇧⌥+→ 窗口整体右移10%（不改大小）
+bind left:shift;alt         nudge -10% +0   # ⇧⌥+← 窗口整体左移10%
+bind up:shift;alt           nudge +0   -10% # ⇧⌥+↑ 窗口整体上移10%
+bind down:shift;alt         nudge +0   +10% # ⇧⌥+↓ 窗口整体下移10%
+
+# Throw Bindings
+# bind [:${hyper} throw 0 resize:${ssx};${ssy}  # ⌘⇧+[ 把窗口丢到0号显示器并铺满
+# bind ]:${hyper} throw 1 resize:${ssx};${ssy}  # ⌘⇧+] 把窗口丢到1号显示器并铺满
+
+
+# relaunch .slate
+bind s:${hyper} relaunch                    # ⌘⇧+s 重新加载 .slate 配置（改完用它生效）
+# undo
+bind z:${hyper} undo                        # ⌘⇧+z 撤销上一次窗口操作
+
+# Focus Bindings
+bind right:${hyper}    focus right          # ⌘⇧+→ 焦点切到右侧窗口（覆盖上方 resize）
+bind left:${hyper}     focus left           # ⌘⇧+← 焦点切到左侧窗口（覆盖上方 resize）
+bind up:${hyper}       focus up             # ⌘⇧+↑ 焦点切到上方窗口（覆盖上方 resize）
+bind down:${hyper}     focus down           # ⌘⇧+↓ 焦点切到下方窗口（覆盖上方 resize）
+
+# Resize Bindings
+#bind right:${hyper}       resize +10% +0    # ⌘⇧+→ 宽度+10%（注意：被下方 focus 覆盖，实际未生效）
+#bind left:${hyper}        resize -10% +0    # ⌘⇧+← 宽度-10%（同上，被 focus 覆盖）
+#bind up:${hyper}          resize +0   -10%  # ⌘⇧+↑ 高度-10%（同上，被 focus 覆盖）
+#bind down:${hyper}        resize +0   +10%  # ⌘⇧+↓ 高度+10%（同上，被 focus 覆盖）
+
+# 注意：此行已禁用！Slate 注册 ⇧⌘+Tab 会连带破坏系统的 ⌘+Tab 切换器，勿再启用
+#bind tab:shift;cmd focus 'Google Chrome'    # ⇧⌘+Tab 直接聚焦 Chrome（会导致 ⌘+Tab 失效）
+
+# App bindings
+alias hyperApp cmd;ctrl                        # 组合键：定义 hyperApp = ⌘+⌃，用于切换 App
+bind 0:${hyperApp} focus 'Ghostty'          # ⌘⌃+0 聚焦 Ghostty 终端
+bind 2:${hyperApp} focus 'Paseo'           # ⌘⌃+8 聚焦 QQ音乐
+bind 1:${hyperApp} focus 'Google Chrome'    # ⌘⌃+1 聚焦 Chrome 浏览器
+bind 3:${hyperApp} focus 'Feishu'           # ⌘⌃+3 聚焦飞书 Feishu
+bind 8:${hyperApp} focus 'Telegram'         # ⌘⌃+2 聚焦 Telegram
+bind 9:${hyperApp} focus 'Code'             # ⌘⌃+9 聚焦 VS Code（注意：应用名是 Code，不是 Visual Studio Code）

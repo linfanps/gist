@@ -1,0 +1,113 @@
+# https://github.com/linfanps/gist  —  conf/zshrc
+# 本机 ~/.zshrc 软链至此；迁移步骤见文件末尾。
+
+export GOPATH=~/Code/go
+export LANG=en_US.UTF-8
+export PATH=$HOME/.local/bin:$GOPATH/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/mysql/bin:$PATH
+
+# 密钥与凭据放在 ~/.KEY（权限 600，不纳入版本管理）
+[ -f ~/.KEY ] && source ~/.KEY
+
+# completion (brew-installed tools put their completions in site-functions)
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+compinit
+
+eval "$(mise activate zsh)"
+eval "$(starship init zsh)"
+
+# fzf: Ctrl+R history, Ctrl+T files, Alt+C dirs, **<Tab> fuzzy completion
+# use fd for file/dir listing (fast, respects .gitignore, includes dotfiles)
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git --exclude .DS_Store"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
+source <(fzf --zsh)
+
+# zsh plugins (brew); syntax-highlighting must stay last
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Tab: accept the gray suggestion if there is one, otherwise normal completion
+_tab_accept_or_complete() {
+  if [[ -n $POSTDISPLAY ]]; then
+    zle autosuggest-accept
+  else
+    zle fzf-completion
+  fi
+}
+zle -N _tab_accept_or_complete
+bindkey '^I' _tab_accept_or_complete
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+#alias
+alias ll='ls -l'
+alias l='ls -l'
+alias la='ls -a'
+alias ls='eza'
+alias cat='bat'
+alias cd='z'
+
+alias vi='mvim -v'
+alias vim='mvim -v'
+alias bi='brew install'
+alias bs='brew search'
+alias bui='brew uninstall'
+alias bl='brew list'
+
+# zoxide must be initialized last
+eval "$(zoxide init zsh)"
+
+
+# ============================================================================
+# 迁移到新机器时，按以下顺序安装，本文件即可直接使用
+# ============================================================================
+#
+# 0) Homebrew（其余一切的前提）
+#    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#
+# 1) 终端本体
+#    brew install --cask ghostty
+#      Ghostty - 原生 UI + GPU 加速的终端，本机默认终端
+#
+# 2) 本文件直接依赖的工具，缺任何一个都会在启动时报错
+#    brew install zsh mise starship fzf fd eza bat zoxide macvim \
+#                 zsh-autosuggestions zsh-syntax-highlighting
+#
+#    各自的用途：
+#      mise                    - 运行时版本管理（go/node/python），替代 gvm/nvm
+#      starship                - 提示符，配置见 ~/.config/starship.toml
+#      fzf                     - 模糊查找：Ctrl+R 历史 / Ctrl+T 文件 / Alt+C 目录 / **<Tab>
+#      fd                      - 快速 find，供 fzf 作为后端列文件
+#      eza                     - ls 替代（别名 ls）
+#      bat                     - cat 替代，带语法高亮（别名 cat）
+#      zoxide                  - 智能 cd（别名 cd），按访问频率跳转
+#      macvim                  - 提供 mvim（别名 vi/vim）
+#      zsh-autosuggestions     - 灰色历史建议，Tab 接受
+#      zsh-syntax-highlighting - 命令语法高亮，必须最后 source
+#
+# 3) 运行时（mise 管理，版本记录在 ~/.config/mise/config.toml）
+#    mise use -g go@1.24
+#
+# 4) 环境里的其余工具（不被本文件直接引用，但属于同一套配置）
+#    brew install git-delta gh ripgrep tmux wget
+#      git-delta - git diff 分页器，配置见 ~/.gitconfig 的 [delta]
+#      gh        - GitHub CLI，同时作为 git 的 credential helper
+#      ripgrep   - rg，快速全文搜索
+#      tmux      - 终端复用，配置见 ~/.tmux.conf
+#
+# 5) tmux（配置文件同在本仓库 conf/ 下）
+#    ln -s <仓库>/conf/tmux.conf ~/.tmux.conf
+#    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#    再在 tmux 中按 prefix + I 装插件（prefix 是 C-q，不是默认的 C-b）
+#    插件目录 ~/.tmux/plugins 和会话存档 ~/.tmux/resurrect 都不进仓库
+#
+# 6) 需要手工补的本机文件（均不在仓库里）
+#    ~/.KEY             - API key 等凭据，格式见本文件顶部的加载逻辑
+#    ~/.ssh/config      - 服务器别名，内含真实地址
+#    ~/.ssh/id_*        - 私钥
+#
+# 注意：本文件中 source 的顺序不能随意调整
+#   - compinit 必须在插件之前
+#   - zsh-syntax-highlighting 必须是最后一个被 source 的插件
+#   - zoxide 必须在最后初始化，否则它的 chpwd hook 会被后续配置覆盖
+# ============================================================================

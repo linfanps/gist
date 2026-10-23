@@ -6,23 +6,40 @@
 
 | 目录 | 作用 | 定位 |
 | --- | --- | --- |
-| [`conf/`](./conf/) | 各 AI 编码工具共用的全局工作规定 | `conf/AGENTS.md` 为单一来源；本机 `~/.AGENTS.md` 以及 Claude Code、Codex、Trae 的配置文件均软链至此 |
+| [`conf/`](./conf/) | 本机常用配置：AI 工具指令、shell、tmux、窗口管理 | 每个文件都是单一来源，本机对应的点文件软链至此；密钥、SSH 和公司相关配置一律不入库 |
 | [`shadowrocket-rules/`](./shadowrocket-rules/) | Shadowrocket 配置与独立规则集 | 当前维护的网络规则；公开文件不包含 MITM CA 私钥和口令 |
 | [`tab-renamer/`](./tab-renamer/) | 自定义 Chrome 标签页标题的 Manifest V3 扩展 | 可直接以“加载已解压的扩展程序”方式安装，详细说明见目录内 README |
 | [`vim/`](./vim/) | 从 `linfanps/vim` 迁入的 Vim 配置、脚本和模板 | 旧版 Vim 开发环境归档，以 Vundle 管理插件，适合参考或在旧环境中复用 |
 
-## AI 工具配置
+## 本机配置（conf/）
 
-`conf/AGENTS.md` 是给 AI 编码工具读的全局工作规定，涵盖破坏性操作的确认边界、浏览器自动化约定和服务器登录方式。它是唯一的源文件，三端通过软链共用：
+`conf/` 收集本机的常用配置文件，每个都是单一来源，由家目录下对应的点文件软链过来：
+
+| 仓库文件 | 软链到 | 说明 |
+| --- | --- | --- |
+| `conf/AGENTS.md` | `~/.AGENTS.md` | 给 AI 编码工具读的全局工作规定；`~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md`、`~/.trae/AGENTS.md` 再软链到 `~/.AGENTS.md`，三端共用一份 |
+| `conf/zshrc` | `~/.zshrc` | zsh 配置；文件末尾附有迁移到新机器时的完整安装步骤 |
+| `conf/tmux.conf` | `~/.tmux.conf` | tmux 配置，prefix 为 `C-q`；插件由 tpm 管理 |
+| `conf/slate` | `~/.slate` | Slate 窗口管理的快捷键与布局 |
+
+软链方式：
 
 ```bash
-ln -s ~/Code/ccproject/Assistant/gist/conf/AGENTS.md ~/.AGENTS.md
-ln -s ~/.AGENTS.md ~/.claude/CLAUDE.md    # Claude Code
-ln -s ~/.AGENTS.md ~/.codex/AGENTS.md     # Codex
-ln -s ~/.AGENTS.md ~/.trae/AGENTS.md      # Trae
+ln -s "$PWD/conf/zshrc"     ~/.zshrc
+ln -s "$PWD/conf/tmux.conf" ~/.tmux.conf
+ln -s "$PWD/conf/slate"     ~/.slate
+ln -s "$PWD/conf/AGENTS.md" ~/.AGENTS.md
+ln -s ~/.AGENTS.md ~/.claude/CLAUDE.md
+ln -s ~/.AGENTS.md ~/.codex/AGENTS.md
+ln -s ~/.AGENTS.md ~/.trae/AGENTS.md
 ```
 
-文件里的服务器只写 `~/.ssh/config` 中的别名（如 `ssh TencentCloudHost`），真实地址和用户名不进仓库。使用前需要在本机 `~/.ssh/config` 里配好对应的 `Host` 条目。
+以下内容**不**纳入本仓库，迁移时需在新机器上单独准备：
+
+- `~/.KEY` — API key 等凭据，由 `conf/zshrc` 条件加载（文件不存在时静默跳过）
+- `~/.ssh/config`、`~/.ssh/id_*` — 服务器别名、真实地址和私钥。`conf/` 中的文件只写别名（如 `ssh TencentCloudHost`），不写 IP 和用户名
+- `~/.gitconfig-work` — 公司身份与内网仓库配置
+- `~/.tmux/plugins/`、`~/.tmux/resurrect/` — 插件由 tpm 克隆；会话存档含 pane 屏幕内容，不应外传
 
 ## Shadowrocket 规则
 
