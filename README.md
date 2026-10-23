@@ -6,9 +6,23 @@
 
 | 目录 | 作用 | 定位 |
 | --- | --- | --- |
+| [`conf/`](./conf/) | 各 AI 编码工具共用的全局工作规定 | `conf/AGENTS.md` 为单一来源；本机 `~/.AGENTS.md` 以及 Claude Code、Codex、Trae 的配置文件均软链至此 |
 | [`shadowrocket-rules/`](./shadowrocket-rules/) | Shadowrocket 配置与独立规则集 | 当前维护的网络规则；公开文件不包含 MITM CA 私钥和口令 |
 | [`tab-renamer/`](./tab-renamer/) | 自定义 Chrome 标签页标题的 Manifest V3 扩展 | 可直接以“加载已解压的扩展程序”方式安装，详细说明见目录内 README |
 | [`vim/`](./vim/) | 从 `linfanps/vim` 迁入的 Vim 配置、脚本和模板 | 旧版 Vim 开发环境归档，以 Vundle 管理插件，适合参考或在旧环境中复用 |
+
+## AI 工具配置
+
+`conf/AGENTS.md` 是给 AI 编码工具读的全局工作规定，涵盖破坏性操作的确认边界、浏览器自动化约定和服务器登录方式。它是唯一的源文件，三端通过软链共用：
+
+```bash
+ln -s ~/Code/ccproject/Assistant/gist/conf/AGENTS.md ~/.AGENTS.md
+ln -s ~/.AGENTS.md ~/.claude/CLAUDE.md    # Claude Code
+ln -s ~/.AGENTS.md ~/.codex/AGENTS.md     # Codex
+ln -s ~/.AGENTS.md ~/.trae/AGENTS.md      # Trae
+```
+
+文件里的服务器只写 `~/.ssh/config` 中的别名（如 `ssh TencentCloudHost`），真实地址和用户名不进仓库。使用前需要在本机 `~/.ssh/config` 里配好对应的 `Host` 条目。
 
 ## Shadowrocket 规则
 
