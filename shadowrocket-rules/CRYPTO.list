@@ -1,23 +1,7 @@
-# NAME: CRYPTO
-# DESCRIPTION: Crypto routing rules extracted from top500_whitelist.conf.
-# FORMAT: Shadowrocket RULE-SET list; select the outbound policy in the parent configuration.
-# UPDATED: 2026-10-22
-# DOMAIN: 7
-# DOMAIN-SUFFIX: 104
-# IP-CIDR: 7
-# TOTAL: 118
-#
-# SOURCES:
-# - top500_whitelist.conf (rules assigned to CRYPTO节点)
-# - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Shadowrocket/OKX/OKX.list
-# - https://raw.githubusercontent.com/StricklandF/Filter/main/Binance.list
-#
-# NOTE: RULE-SET references were expanded, policy suffixes were removed,
-#       and exact duplicate rules were removed with the first occurrence retained.
+# CRYPTO — 交易所与 DeFi 域名，供 main.conf 以 RULE-SET 引用。
+# 规则不带策略后缀，策略由引用方指定；本文件手工维护。
 
-# -----------------------------------------------------------------------------
 # General crypto, DeFi, and shared services
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,sumsub.com
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,axis.to
@@ -49,17 +33,13 @@ DOMAIN-SUFFIX,merkl.xyz
 DOMAIN-SUFFIX,bouncebit.io
 DOMAIN-SUFFIX,moveposition.xyz
 
-# -----------------------------------------------------------------------------
 # Centralized exchanges
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,htx.com
 DOMAIN-SUFFIX,coincall.com
 DOMAIN-SUFFIX,bitfinex.com
 DOMAIN-SUFFIX,backpack.exchange
 
-# -----------------------------------------------------------------------------
 # Bybit
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,bycsi.com
 DOMAIN-SUFFIX,bybit.com
 DOMAIN-SUFFIX,byd3c3.com
@@ -70,9 +50,7 @@ DOMAIN-SUFFIX,bybit.cloud
 DOMAIN-SUFFIX,byapps.net
 DOMAIN-SUFFIX,bybits.org
 
-# -----------------------------------------------------------------------------
 # Gate.io
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,gateio.im
 DOMAIN-SUFFIX,web3gate.cc
 DOMAIN-SUFFIX,gateio.services
@@ -84,22 +62,16 @@ DOMAIN-SUFFIX,gate.com
 DOMAIN-SUFFIX,gate.io
 DOMAIN-SUFFIX,gt-link.club
 
-# -----------------------------------------------------------------------------
 # Bitget
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,bitget.cloud
 DOMAIN-SUFFIX,bitgetapps.com
 
-# -----------------------------------------------------------------------------
 # OKX RULE-SET
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
 DOMAIN-SUFFIX,okx.com
 
-# -----------------------------------------------------------------------------
 # Binance RULE-SET — exact domains
-# -----------------------------------------------------------------------------
 DOMAIN,public.nftstatic.com
 DOMAIN,d3sknckuh1o9tg.cloudfront.net
 DOMAIN,public-1306379396.file.myqcloud.com
@@ -108,9 +80,7 @@ DOMAIN,domain-config-1306379396.file.myqcloud.com
 DOMAIN,bin-prod-new-websocket-alb-1463526464.ap-northeast-1.elb.amazonaws.com
 DOMAIN,aad90d5c0e88c4b4285bd912f64d970d-1403944741.ap-northeast-1.elb.amazonaws.com
 
-# -----------------------------------------------------------------------------
 # Binance RULE-SET — domain suffixes
-# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,appsflayer.com
 DOMAIN-SUFFIX,binance.cc
 DOMAIN-SUFFIX,binance.charity
@@ -158,9 +128,7 @@ DOMAIN-SUFFIX,yingwangtech.cc
 DOMAIN-SUFFIX,bscdnweb.com
 DOMAIN-SUFFIX,binance.info
 
-# -----------------------------------------------------------------------------
 # Binance RULE-SET — IP networks
-# -----------------------------------------------------------------------------
 IP-CIDR,47.107.98.27/32,no-resolve
 IP-CIDR,47.107.127.135/32,no-resolve
 IP-CIDR,52.68.117.1/32,no-resolve
