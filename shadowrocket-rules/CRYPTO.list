@@ -2,6 +2,8 @@
 # 规则不带策略后缀，策略由引用方指定；本文件手工维护。
 
 # General crypto, DeFi, and shared services
+# 交易所资源走 *.cloudflare.net，与交易所同节点出口，避免会话和地区不一致
+DOMAIN-SUFFIX,cloudflare.net
 DOMAIN-SUFFIX,sumsub.com
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,axis.to
