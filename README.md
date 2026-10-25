@@ -53,26 +53,16 @@ https://raw.githubusercontent.com/linfanps/gist/master/shadowrocket-rules/main.c
 | --- | --- | --- |
 | `main.conf` | 入口配置：`[General]`、`CRYPTO` 节点组、规则引用与兜底 | 手工 |
 | `CRYPTO.list` | 交易所与 DeFi 域名 | 手工 |
-| `reference/TOP500_REJECT.list` | 广告与追踪域名 | 脚本生成 |
-| `reference/TOP500_PROXY.list` | GEOIP 判为 CN 但需走代理的域名与网段 | 脚本生成 |
-
-`reference/` 下的文件由 [Shadowrocket-ADBlock-Rules-Forever](https://github.com/Johnshall/Shadowrocket-ADBlock-Rules-Forever) 的完整配置切分而来，不要手工编辑。更新上游名单：
-
-```bash
-cd shadowrocket-rules && ./update-upstream.sh   # 只写文件，不碰 git
-```
-
-脚本在下载失败、上游出现未知策略名或抽取条数塌陷时会直接退出，而不是生成错误的规则。跑完提交推送，手机下次拉 `RULE-SET` 才会看到新名单 —— 没有自动更新。
 
 `[Rule]` 是自上而下首个匹配生效，改 `main.conf` 前需要知道这几个顺序约束：
 
-- `TOP500_REJECT.list` 必须在 `TOP500_PROXY.list` 之前 —— 后者含 `linkedin.cn`，前者含 358 个 `.cn` 广告域名
-- `DOMAIN-SUFFIX,cn,DIRECT` 必须在两者之后，否则会把 `linkedin.cn` 和那 358 个域名抢成直连
 - 个人规则放最前，`FINAL,PROXY` 放最后
+- 带 `DOMAIN-KEYWORD` 的第三方规则集（如 Google）范围很宽，加之前先确认不会抢走别的规则
+- `DOMAIN-SUFFIX,cn,DIRECT` 放在所有代理规则之后，否则会把 `.cn` 下该走代理的域名抢成直连
 
 `CRYPTO` 节点组用 `policy-regex-filter=CRYPTO` 按节点名筛选，配置里不写死任何节点地址。
 
-上游的 Direct 块（境外可直连站点）未纳入，这类流量由 `GEOIP,CN,DIRECT` 和 `FINAL,PROXY` 决定：代价是多走一些代理流量，换取规则文件数量和维护成本都更低。
+配置本身不含广告过滤和大体量的分流名单，这些改用 Shadowrocket 模块按需控制；`main.conf` 只保留节点组、个人分流和兜底。
 
 MITM 的 `ca-p12` 和 `ca-passphrase` 不应提交到公开仓库。需要 HTTPS 解密时，应在 Shadowrocket 本地生成证书，或保存在仅本机/iCloud 私有同步的证书模块中。
 

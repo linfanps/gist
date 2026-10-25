@@ -2,8 +2,6 @@
 # 规则不带策略后缀，策略由引用方指定；本文件手工维护。
 
 # General crypto, DeFi, and shared services
-# 交易所资源走 *.cloudflare.net，与交易所同节点出口，避免会话和地区不一致
-DOMAIN-SUFFIX,cloudflare.net
 DOMAIN-SUFFIX,sumsub.com
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,axis.to
@@ -72,6 +70,8 @@ DOMAIN-SUFFIX,bitgetapps.com
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
 DOMAIN-SUFFIX,okx.com
+# okx.com 的 Cloudflare CNAME 落点，与 okx.com 同节点出口
+DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
 
 # Binance RULE-SET — exact domains
 DOMAIN,public.nftstatic.com
