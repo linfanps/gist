@@ -53,6 +53,7 @@ https://raw.githubusercontent.com/linfanps/gist/master/shadowrocket-rules/main.c
 | --- | --- | --- |
 | `main.conf` | 入口配置：`[General]`、`CRYPTO` 节点组、规则引用与兜底 | 手工 |
 | `CRYPTO.list` | 交易所与 DeFi 域名 | 手工 |
+| `AI.list` | Claude、ChatGPT、Apple Intelligence 域名；Claude 与 Apple 摘自 [iab0x00/ProxyRules](https://github.com/iab0x00/ProxyRules)，ChatGPT 取自 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的 `OpenAI.list` | 手工 |
 
 `[Rule]` 是自上而下首个匹配生效，改 `main.conf` 前需要知道这几个顺序约束：
 
