@@ -21,8 +21,6 @@
 
 - 服务器一律用 `~/.ssh/config` 中的别名登录，不要在文档、脚本或命令里写 IP 和用户名：
   - `ssh TencentCloudHost` — 腾讯云，部署与运维
-  - `ssh CloudCloneHost` — CC 云
-  - `ssh QQGCloud` — QQG 云（Windows）
   - `ssh USVPN` — 美国 VPN 代理
   - `ssh DevboxHost` — 工作测试机（公司内网）
 - 别名的真实地址只存在于本机 `~/.ssh/config`，该文件不纳入版本管理。
